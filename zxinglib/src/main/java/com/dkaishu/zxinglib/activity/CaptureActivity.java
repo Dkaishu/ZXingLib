@@ -1,0 +1,83 @@
+package com.dkaishu.zxinglib.activity;
+
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+
+import com.dkaishu.zxinglib.R;
+import com.dkaishu.zxinglib.CheckPermissionUtils;
+
+
+/**
+ * Initial the camera
+ * <p>
+ * 默认的二维码扫描Activity
+ */
+public class CaptureActivity extends AppCompatActivity {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.camera);
+        initPermission();
+        CaptureFragment captureFragment = new CaptureFragment();
+        captureFragment.setAnalyzeCallback(analyzeCallback);
+        getSupportFragmentManager().beginTransaction().replace(R.id.fl_zxing_container, captureFragment).commit();
+        captureFragment.setCameraInitCallBack(new CaptureFragment.CameraInitCallBack() {
+            @Override
+            public void callBack(Exception e) {
+                if (e == null) {
+
+                } else {
+                    Log.e("ZxingLib", "CameraInitCallBack:  ", e);
+                }
+            }
+        });
+
+    }
+
+    /**
+     * 二维码解析回调函数
+     */
+    CodeUtils.AnalyzeCallback analyzeCallback = new CodeUtils.AnalyzeCallback() {
+        @Override
+        public void onAnalyzeSuccess(Bitmap mBitmap, String result) {
+            Intent resultIntent = new Intent();
+            Bundle bundle = new Bundle();
+            bundle.putInt(CodeUtils.RESULT_TYPE, CodeUtils.RESULT_SUCCESS);
+            bundle.putString(CodeUtils.RESULT_STRING, result);
+            resultIntent.putExtras(bundle);
+            CaptureActivity.this.setResult(RESULT_OK, resultIntent);
+            CaptureActivity.this.finish();
+        }
+
+        @Override
+        public void onAnalyzeFailed() {
+            Intent resultIntent = new Intent();
+            Bundle bundle = new Bundle();
+            bundle.putInt(CodeUtils.RESULT_TYPE, CodeUtils.RESULT_FAILED);
+            bundle.putString(CodeUtils.RESULT_STRING, "");
+            resultIntent.putExtras(bundle);
+            CaptureActivity.this.setResult(RESULT_OK, resultIntent);
+            CaptureActivity.this.finish();
+        }
+    };
+
+    /**
+     * 初始化权限事件
+     */
+    private void initPermission() {
+        //检查权限
+        String[] permissions = CheckPermissionUtils.checkPermission(this);
+        if (permissions.length == 0) {
+            //权限都申请了
+            //是否登录
+        } else {
+            //申请权限
+            ActivityCompat.requestPermissions(this, permissions, 100);
+        }
+    }
+}
