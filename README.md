@@ -1,4 +1,5 @@
 # ZXingLib
+[![](https://jitpack.io/v/helen-x/JitpackReleaseDemo.svg)](https://jitpack.io/#Dkaishu/ZXingLib)
 快速集成：二维码扫描及生成
 - 二维码扫描识别
 - 二维码生成（支持是否带图标）
