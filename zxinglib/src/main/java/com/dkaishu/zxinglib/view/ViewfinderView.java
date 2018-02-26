@@ -42,7 +42,7 @@ import java.util.HashSet;
  */
 public final class ViewfinderView extends View {
 
-    private static final long ANIMATION_DELAY = 100L;
+    private static final int LIGHT_MOVE = 6;
     private static final int OPAQUE = 0xFF;
 
     private final Paint paint;
@@ -93,17 +93,17 @@ public final class ViewfinderView extends View {
         }
 
         // 扫描框的宽度
-        CameraManager.FRAME_WIDTH = (int) ta.getDimension(R.styleable.ViewfinderView_inner_width, DisplayUtil.screenWidthPx / 2);
+        CameraManager.FRAME_WIDTH = (int) ta.getDimension(R.styleable.ViewfinderView_inner_width, (float) (DisplayUtil.screenWidthPx / 1.4));
 
         // 扫描框的高度
-        CameraManager.FRAME_HEIGHT = (int) ta.getDimension(R.styleable.ViewfinderView_inner_height, DisplayUtil.screenWidthPx / 2);
+        CameraManager.FRAME_HEIGHT = (int) ta.getDimension(R.styleable.ViewfinderView_inner_height, (float) (DisplayUtil.screenWidthPx / 1.4));
 
         // 扫描框边角颜色
         innercornercolor = ta.getColor(R.styleable.ViewfinderView_inner_corner_color, Color.parseColor("#45DDDD"));
         // 扫描框边角长度
         innercornerlength = (int) ta.getDimension(R.styleable.ViewfinderView_inner_corner_length, 65);
         // 扫描框边角宽度
-        innercornerwidth = (int) ta.getDimension(R.styleable.ViewfinderView_inner_corner_width, 15);
+        innercornerwidth = (int) ta.getDimension(R.styleable.ViewfinderView_inner_corner_width, 6);
 
         // 扫描bitmap
         Drawable drawable = ta.getDrawable(R.styleable.ViewfinderView_inner_scan_bitmap);
@@ -113,7 +113,7 @@ public final class ViewfinderView extends View {
         // 扫描控件
         scanLight = BitmapFactory.decodeResource(getResources(), ta.getResourceId(R.styleable.ViewfinderView_inner_scan_bitmap, R.drawable.scan_light));
         // 扫描速度
-        SCAN_VELOCITY = ta.getInt(R.styleable.ViewfinderView_inner_scan_speed, 5);
+        SCAN_VELOCITY = ta.getInt(R.styleable.ViewfinderView_inner_scan_speed, 20);
 
         isCircle = ta.getBoolean(R.styleable.ViewfinderView_inner_scan_iscircle, true);
 
@@ -173,7 +173,7 @@ public final class ViewfinderView extends View {
                 }
             }
 
-            postInvalidateDelayed(ANIMATION_DELAY, frame.left, frame.top, frame.right, frame.bottom);
+            postInvalidateDelayed(100/SCAN_VELOCITY, frame.left, frame.top, frame.right, frame.bottom);
         }
     }
 
@@ -201,7 +201,7 @@ public final class ViewfinderView extends View {
         if (scanLineTop >= frame.bottom - 30) {
             scanLineTop = frame.top;
         } else {
-            scanLineTop += SCAN_VELOCITY;
+            scanLineTop += LIGHT_MOVE;
         }
         Rect scanRect = new Rect(frame.left, scanLineTop, frame.right,
                 scanLineTop + 30);

@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.dkaishu.zxinglib.activity.CaptureActivity;
+import com.dkaishu.zxinglib.activity.CaptureFragment;
 import com.dkaishu.zxinglib.activity.CodeUtils;
 
 public class MainActivity extends AppCompatActivity {
@@ -24,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
         bt1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                CaptureFragment.showFlashLight(true);
                 Intent intent = new Intent(getApplication(), CaptureActivity.class);
                 startActivityForResult(intent, REQUEST_CODE);
             }

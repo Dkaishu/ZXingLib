@@ -47,7 +47,8 @@ That's it! Add then:
          }
  
  - 打开扫码界面
- 
+
+       CaptureFragment.showFlashLight(true);  //是否显示闪光灯开关，默认不显示
        Intent intent = new Intent(MainActivity.this, CaptureActivity.class);
        startActivityForResult(intent, REQUEST_CODE);
        
@@ -69,4 +70,80 @@ That's it! Add then:
              }
          }
          
- - 其他待补充
+ - 解析二维码图片
+
+        // 打开图库
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        intent.setType("image/*");
+        startActivityForResult(intent, REQUEST_IMAGE);
+
+        //解析
+        if (requestCode == 1) {
+                    if (data != null) {
+                        Uri uri = data.getData();
+                        ContentResolver cr = getContentResolver();
+                        try {
+                            Bitmap mBitmap = MediaStore.Images.Media.getBitmap(cr, uri);
+                            CodeUtils.analyzeBitmap(mBitmap, new CodeUtils.AnalyzeCallback() {
+                                @Override
+                                public void onAnalyzeSuccess(Bitmap mBitmap, String result) {
+                                    //解析结果：result
+                                }
+
+                                @Override
+                                public void onAnalyzeFailed() {
+                                    //解析失败
+                                }
+                            });
+
+                            if (mBitmap != null) {
+                                mBitmap.recycle();
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+  - 生成二维码
+
+        //最后一个参数为null时，则不带logo
+        Bitmap Bitmap = CodeUtils.createImage(textContent, 400, 400, BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher));
+
+    - 自定义UI
+
+            //在activity中
+            @Override
+                protected void onCreate(Bundle savedInstanceState) {
+                    super.onCreate(savedInstanceState);
+                    setContentView(R.layout.activity_second);
+                    CaptureFragment captureFragment = new CaptureFragment();
+                    // 一、
+                    CodeUtils.setFragmentArgs(captureFragment, R.layout.my_camera);
+                    // 二、
+                    captureFragment.setAnalyzeCallback(analyzeCallback);
+                    // 三、
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fl_my_container, captureFragment).commit();
+                }
+
+
+            //根据需求选择性自定义即可，其中 ：
+            // 一、调用CondeUtils.setFragmentArgs方法，改变参数进行调整，具体参数有：
+            app:inner_width="200dp"
+            app:inner_height="200dp"
+            app:inner_margintop="150dp"
+            app:inner_corner_color="@color/scan_corner_color"
+            app:inner_corner_length="30dp"
+            app:inner_corner_width="5dp"
+            app:inner_scan_bitmap="@drawable/scan_image"
+            app:inner_scan_speed="10"
+            app:inner_scan_iscircle="false"
+
+            // 二、analyzeCallback 是对扫描结果的回调， new 一个并实现方法即可
+
+            // 三、替换添加扫描控件
+
+
+
+
+    - 其他待补充

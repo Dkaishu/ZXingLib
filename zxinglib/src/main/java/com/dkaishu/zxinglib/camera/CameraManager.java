@@ -345,4 +345,5 @@ public final class CameraManager {
     public void setPreviewing(boolean previewing) {
         this.previewing = previewing;
     }
+
 }

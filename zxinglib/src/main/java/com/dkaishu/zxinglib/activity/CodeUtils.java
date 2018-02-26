@@ -30,10 +30,10 @@ import java.util.Vector;
  * 二维码扫描工具类
  */
 public class CodeUtils {
-    public static final String RESULT_TYPE = "result_type";
-    public static final String RESULT_STRING = "result_string";
-    public static final int RESULT_SUCCESS = 1;
-    public static final int RESULT_FAILED = 2;
+    public static final String RESULT_TYPE    = "result_type";
+    public static final String RESULT_STRING  = "result_string";
+    public static final int    RESULT_SUCCESS = 1;
+    public static final int    RESULT_FAILED  = 2;
 
     public static final String LAYOUT_ID = "layout_id";
 
@@ -117,7 +117,7 @@ public class CodeUtils {
             int offsetX = w / 2;
             int offsetY = h / 2;
 
-            int scaleWidth = 0;
+            int scaleWidth  = 0;
             int scaleHeight = 0;
             if (scaleLogo != null) {
                 scaleWidth = scaleLogo.getWidth();
@@ -132,7 +132,7 @@ public class CodeUtils {
             //设置空白边距的宽度
             hints.put(EncodeHintType.MARGIN, 0);
             BitMatrix bitMatrix = new QRCodeWriter().encode(text, BarcodeFormat.QR_CODE, w, h, hints);
-            int[] pixels = new int[w * h];
+            int[]     pixels    = new int[w * h];
             for (int y = 0; y < h; y++) {
                 for (int x = 0; x < w; x++) {
                     if (x >= offsetX && x < offsetX + scaleWidth && y >= offsetY && y < offsetY + scaleHeight) {
@@ -166,8 +166,8 @@ public class CodeUtils {
 
     private static Bitmap getScaleLogo(Bitmap logo, int w, int h) {
         if (logo == null) return null;
-        Matrix matrix = new Matrix();
-        float scaleFactor = Math.min(w * 1.0f / 5 / logo.getWidth(), h * 1.0f / 5 / logo.getHeight());
+        Matrix matrix      = new Matrix();
+        float  scaleFactor = Math.min(w * 1.0f / 5 / logo.getWidth(), h * 1.0f / 5 / logo.getHeight());
         matrix.postScale(scaleFactor, scaleFactor);
         Bitmap result = Bitmap.createBitmap(logo, 0, 0, logo.getWidth(), logo.getHeight(), matrix, true);
         return result;
@@ -178,9 +178,9 @@ public class CodeUtils {
      */
     public interface AnalyzeCallback {
 
-        public void onAnalyzeSuccess(Bitmap mBitmap, String result);
+        void onAnalyzeSuccess(Bitmap mBitmap, String result);
 
-        public void onAnalyzeFailed();
+        void onAnalyzeFailed();
     }
 
 
@@ -200,8 +200,12 @@ public class CodeUtils {
         captureFragment.setArguments(bundle);
     }
 
-    public static void isLightEnable(boolean isEnable) {
-        if (isEnable) {
+    /**
+     * 打开或关闭闪光灯
+     * @param on
+     */
+    public static void setLight(boolean on) {
+        if (on) {
             Camera camera = CameraManager.get().getCamera();
             if (camera != null) {
                 Camera.Parameters parameter = camera.getParameters();
