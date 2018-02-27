@@ -7,7 +7,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -16,7 +15,6 @@ import com.dkaishu.zxinglib.activity.CaptureFragment;
 import com.dkaishu.zxinglib.activity.CodeUtils;
 
 public class MainActivity extends AppCompatActivity {
-    private static final String TAG           = "MainActivity";
     /**
      * 扫描跳转Activity RequestCode
      */
@@ -34,9 +32,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        /**
-         * 处理二维码扫描结果
-         */
         if (requestCode == REQUEST_CODE) {
             //处理扫描结果（在界面上显示）
             if (null != data) {
@@ -52,10 +47,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }
-
-
          /*选择系统图片并解析*/
-
         else if (requestCode == REQUEST_IMAGE) {
             if (data != null) {
                 Uri uri = data.getData();
@@ -103,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void generateQR(View view) {
-        Bitmap Bitmap = CodeUtils.createImage("生成二维码", 300, 300
+        Bitmap Bitmap = CodeUtils.createImage("https://github.com/Dkaishu/ZXingLib", 300, 300
                 , BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher));
         imageView.setImageBitmap(Bitmap);
     }
