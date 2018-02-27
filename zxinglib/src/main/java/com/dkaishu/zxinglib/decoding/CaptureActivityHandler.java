@@ -44,8 +44,8 @@ public final class CaptureActivityHandler extends Handler {
     private static final String TAG = CaptureActivityHandler.class.getSimpleName();
 
     private final CaptureFragment fragment;
-    private final DecodeThread decodeThread;
-    private State state;
+    private final DecodeThread    decodeThread;
+    private       State           state;
 
     private enum State {
         PREVIEW,
@@ -98,7 +98,7 @@ public final class CaptureActivityHandler extends Handler {
             fragment.getActivity().finish();
         } else if (message.what == R.id.launch_product_query) {
             Log.d(TAG, "Got product query message");
-            String url = (String) message.obj;
+            String url    = (String) message.obj;
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
             fragment.getActivity().startActivity(intent);

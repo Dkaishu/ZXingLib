@@ -35,10 +35,10 @@ import java.util.concurrent.CountDownLatch;
 final class DecodeThread extends Thread {
 
     public static final String BARCODE_BITMAP = "barcode_bitmap";
-    private final CaptureFragment fragment;
+    private final CaptureFragment                   fragment;
     private final Hashtable<DecodeHintType, Object> hints;
-    private Handler handler;
-    private final CountDownLatch handlerInitLatch;
+    private       Handler                           handler;
+    private final CountDownLatch                    handlerInitLatch;
 
     DecodeThread(CaptureFragment fragment,
                  Vector<BarcodeFormat> decodeFormats,

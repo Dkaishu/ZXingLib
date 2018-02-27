@@ -1,7 +1,6 @@
 # ZXingLib
 
-[![](https://jitpack.io/v/helen-x/JitpackReleaseDemo.svg)](https://jitpack.io/#Dkaishu/ZXingLib)
-
+[![](https://jitpack.io/v/Dkaishu/ZXingLib.svg)](https://jitpack.io/#Dkaishu/ZXingLib)
 快速集成：二维码扫描及生成
 
 - 二维码扫描识别
@@ -26,7 +25,7 @@ To get the project into your build:
 - Step 2. Add the dependency
 
         dependencies {
-                compile 'com.github.Dkaishu:ZXingLib:V1.0.2'
+                compile 'com.github.Dkaishu:ZXingLib:V1.0.3'
         }
 
 That's it! Add then:
@@ -147,7 +146,7 @@ That's it! Add then:
 
             // 三、替换添加扫描控件
 
-
-
-
     - 其他待补充
+
+     - TODO
+     下版本将默认界面中闪光灯去掉，因为使用者自己去实现更加合理。

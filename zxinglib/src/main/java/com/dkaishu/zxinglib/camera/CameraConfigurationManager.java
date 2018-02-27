@@ -30,16 +30,16 @@ final class CameraConfigurationManager {
 
     private static final String TAG = CameraConfigurationManager.class.getSimpleName();
 
-    private static final int TEN_DESIRED_ZOOM = 27;
+    private static final int TEN_DESIRED_ZOOM  = 27;
     private static final int DESIRED_SHARPNESS = 30;
 
     private static final Pattern COMMA_PATTERN = Pattern.compile(",");
 
     private final Context context;
-    private Point screenResolution;
-    private Point cameraResolution;
-    private int previewFormat;
-    private String previewFormatString;
+    private       Point   screenResolution;
+    private       Point   cameraResolution;
+    private       int     previewFormat;
+    private       String  previewFormatString;
 
     CameraConfigurationManager(Context context) {
         this.context = context;
@@ -54,7 +54,7 @@ final class CameraConfigurationManager {
         previewFormatString = parameters.get("preview-format");
         Log.d(TAG, "Default preview format: " + previewFormat + '/' + previewFormatString);
         WindowManager manager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-        Display display = manager.getDefaultDisplay();
+        Display       display = manager.getDefaultDisplay();
         screenResolution = new Point(display.getWidth(), display.getHeight());
         Log.d(TAG, "Screen resolution: " + screenResolution);
 
@@ -135,7 +135,7 @@ final class CameraConfigurationManager {
     private static Point findBestPreviewSizeValue(CharSequence previewSizeValueString, Point screenResolution) {
         int bestX = 0;
         int bestY = 0;
-        int diff = Integer.MAX_VALUE;
+        int diff  = Integer.MAX_VALUE;
         for (String previewSize : COMMA_PATTERN.split(previewSizeValueString)) {
 
             previewSize = previewSize.trim();
@@ -249,7 +249,7 @@ final class CameraConfigurationManager {
         if (motZoomStepString != null) {
             try {
                 double motZoomStep = Double.parseDouble(motZoomStepString.trim());
-                int tenZoomStep = (int) (10.0 * motZoomStep);
+                int    tenZoomStep = (int) (10.0 * motZoomStep);
                 if (tenZoomStep > 1) {
                     tenDesiredZoom -= tenDesiredZoom % tenZoomStep;
                 }

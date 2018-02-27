@@ -39,7 +39,7 @@ final class DecodeHandler extends Handler {
 
     private static final String TAG = DecodeHandler.class.getSimpleName();
 
-    private final CaptureFragment fragment;
+    private final CaptureFragment   fragment;
     private final MultiFormatReader multiFormatReader;
 
     DecodeHandler(CaptureFragment fragment, Hashtable<DecodeHintType, Object> hints) {
@@ -66,7 +66,7 @@ final class DecodeHandler extends Handler {
      * @param height The height of the preview frame.
      */
     private void decode(byte[] data, int width, int height) {
-        long start = System.currentTimeMillis();
+        long   start     = System.currentTimeMillis();
         Result rawResult = null;
 
         //modify here
@@ -80,7 +80,7 @@ final class DecodeHandler extends Handler {
         height = tmp;
 
         PlanarYUVLuminanceSource source = CameraManager.get().buildLuminanceSource(rotatedData, width, height);
-        BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
+        BinaryBitmap             bitmap = new BinaryBitmap(new HybridBinarizer(source));
         try {
             rawResult = multiFormatReader.decodeWithState(bitmap);
         } catch (ReaderException re) {
@@ -93,7 +93,7 @@ final class DecodeHandler extends Handler {
             long end = System.currentTimeMillis();
             Log.d(TAG, "Found barcode (" + (end - start) + " ms):\n" + rawResult.toString());
             Message message = Message.obtain(fragment.getHandler(), R.id.decode_succeeded, rawResult);
-            Bundle bundle = new Bundle();
+            Bundle  bundle  = new Bundle();
             bundle.putParcelable(DecodeThread.BARCODE_BITMAP, source.renderCroppedGreyscaleBitmap());
             message.setData(bundle);
             //Log.d(TAG, "Sending decode succeeded message...");

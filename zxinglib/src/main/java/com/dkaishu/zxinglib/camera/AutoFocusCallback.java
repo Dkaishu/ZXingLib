@@ -28,7 +28,7 @@ public final class AutoFocusCallback implements Camera.AutoFocusCallback {
     private static final long AUTOFOCUS_INTERVAL_MS = 1500L;
 
     private Handler autoFocusHandler;
-    private int autoFocusMessage;
+    private int     autoFocusMessage;
 
     public void setHandler(Handler autoFocusHandler, int autoFocusMessage) {
         this.autoFocusHandler = autoFocusHandler;

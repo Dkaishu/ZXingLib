@@ -43,15 +43,15 @@ import java.util.HashSet;
 public final class ViewfinderView extends View {
 
     private static final int LIGHT_MOVE = 6;
-    private static final int OPAQUE = 0xFF;
+    private static final int OPAQUE     = 0xFF;
 
-    private final Paint paint;
-    private Bitmap resultBitmap;
-    private final int maskColor;
-    private final int resultColor;
-    private final int resultPointColor;
-    private Collection<ResultPoint> possibleResultPoints;
-    private Collection<ResultPoint> lastPossibleResultPoints;
+    private final Paint                   paint;
+    private       Bitmap                  resultBitmap;
+    private final int                     maskColor;
+    private final int                     resultColor;
+    private final int                     resultPointColor;
+    private       Collection<ResultPoint> possibleResultPoints;
+    private       Collection<ResultPoint> lastPossibleResultPoints;
 
     public ViewfinderView(Context context) {
         this(context, null);
@@ -126,7 +126,7 @@ public final class ViewfinderView extends View {
         if (frame == null) {
             return;
         }
-        int width = canvas.getWidth();
+        int width  = canvas.getWidth();
         int height = canvas.getHeight();
 
         // Draw the exterior (i.e. outside the framing rect) darkened
@@ -147,7 +147,7 @@ public final class ViewfinderView extends View {
             drawScanLight(canvas, frame);
 
             Collection<ResultPoint> currentPossible = possibleResultPoints;
-            Collection<ResultPoint> currentLast = lastPossibleResultPoints;
+            Collection<ResultPoint> currentLast     = lastPossibleResultPoints;
             if (currentPossible.isEmpty()) {
                 lastPossibleResultPoints = null;
             } else {
@@ -173,16 +173,16 @@ public final class ViewfinderView extends View {
                 }
             }
 
-            postInvalidateDelayed(100/SCAN_VELOCITY, frame.left, frame.top, frame.right, frame.bottom);
+            postInvalidateDelayed(100 / SCAN_VELOCITY, frame.left, frame.top, frame.right, frame.bottom);
         }
     }
 
     // 扫描线移动的y
-    private int scanLineTop;
+    private int     scanLineTop;
     // 扫描线移动速度
-    private int SCAN_VELOCITY;
+    private int     SCAN_VELOCITY;
     // 扫描线
-    private Bitmap scanLight;
+    private Bitmap  scanLight;
     // 是否展示小圆点
     private boolean isCircle;
 
@@ -233,7 +233,7 @@ public final class ViewfinderView extends View {
         paint.setColor(innercornercolor);
         paint.setStyle(Paint.Style.FILL);
 
-        int corWidth = innercornerwidth;
+        int corWidth  = innercornerwidth;
         int corLength = innercornerlength;
 
         // 左上角

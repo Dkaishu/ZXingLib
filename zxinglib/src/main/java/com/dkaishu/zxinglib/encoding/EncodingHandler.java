@@ -21,8 +21,8 @@ public final class EncodingHandler {
         hints.put(EncodeHintType.CHARACTER_SET, "utf-8");
         BitMatrix matrix = new MultiFormatWriter().encode(str,
                 BarcodeFormat.QR_CODE, widthAndHeight, widthAndHeight);
-        int width = matrix.getWidth();
-        int height = matrix.getHeight();
+        int   width  = matrix.getWidth();
+        int   height = matrix.getHeight();
         int[] pixels = new int[width * height];
 
         for (int y = 0; y < height; y++) {

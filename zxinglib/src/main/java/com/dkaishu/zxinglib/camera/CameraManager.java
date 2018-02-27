@@ -36,8 +36,8 @@ public final class CameraManager {
 
     private static final String TAG = CameraManager.class.getSimpleName();
 
-    public static int FRAME_WIDTH = -1;
-    public static int FRAME_HEIGHT = -1;
+    public static int FRAME_WIDTH     = -1;
+    public static int FRAME_HEIGHT    = -1;
     public static int FRAME_MARGINTOP = -1;
 
     private static CameraManager cameraManager;
@@ -55,23 +55,23 @@ public final class CameraManager {
         SDK_INT = sdkInt;
     }
 
-    private final Context context;
+    private final Context                    context;
     private final CameraConfigurationManager configManager;
-    private Camera camera;
-    private Rect framingRect;
-    private Rect framingRectInPreview;
-    private boolean initialized;
-    private boolean previewing;
-    private final boolean useOneShotPreviewCallback;
+    private       Camera                     camera;
+    private       Rect                       framingRect;
+    private       Rect                       framingRectInPreview;
+    private       boolean                    initialized;
+    private       boolean                    previewing;
+    private final boolean                    useOneShotPreviewCallback;
     /**
      * Preview frames are delivered here, which we pass on to the registered handler. Make sure to
      * clear the handler so it will only receive one message.
      */
-    private final PreviewCallback previewCallback;
+    private final PreviewCallback            previewCallback;
     /**
      * Autofocus callbacks arrive here, and are dispatched to the Handler which requested them.
      */
-    private final AutoFocusCallback autoFocusCallback;
+    private final AutoFocusCallback          autoFocusCallback;
 
     /**
      * Initializes this static object with the Context of the calling Activity.
@@ -246,7 +246,7 @@ public final class CameraManager {
      */
     public Rect getFramingRectInPreview() {
         if (framingRectInPreview == null) {
-            Rect rect = new Rect(getFramingRect());
+            Rect  rect             = new Rect(getFramingRect());
             Point cameraResolution = configManager.getCameraResolution();
             Point screenResolution = configManager.getScreenResolution();
             //modify here
@@ -294,8 +294,8 @@ public final class CameraManager {
      * @return A PlanarYUVLuminanceSource instance.
      */
     public PlanarYUVLuminanceSource buildLuminanceSource(byte[] data, int width, int height) {
-        Rect rect = getFramingRectInPreview();
-        int previewFormat = configManager.getPreviewFormat();
+        Rect   rect                = getFramingRectInPreview();
+        int    previewFormat       = configManager.getPreviewFormat();
         String previewFormatString = configManager.getPreviewFormatString();
         switch (previewFormat) {
             // This is the standard Android format which all devices are REQUIRED to support.

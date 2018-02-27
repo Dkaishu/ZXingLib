@@ -33,10 +33,10 @@ import com.google.zxing.LuminanceSource;
  */
 public final class PlanarYUVLuminanceSource extends LuminanceSource {
     private final byte[] yuvData;
-    private final int dataWidth;
-    private final int dataHeight;
-    private final int left;
-    private final int top;
+    private final int    dataWidth;
+    private final int    dataHeight;
+    private final int    left;
+    private final int    top;
 
     public PlanarYUVLuminanceSource(byte[] yuvData, int dataWidth, int dataHeight, int left, int top,
                                     int width, int height) {
@@ -69,7 +69,7 @@ public final class PlanarYUVLuminanceSource extends LuminanceSource {
 
     @Override
     public byte[] getMatrix() {
-        int width = getWidth();
+        int width  = getWidth();
         int height = getHeight();
 
         // If the caller asks for the entire underlying image, save the copy and give them the
@@ -78,9 +78,9 @@ public final class PlanarYUVLuminanceSource extends LuminanceSource {
             return yuvData;
         }
 
-        int area = width * height;
-        byte[] matrix = new byte[area];
-        int inputOffset = top * dataWidth + left;
+        int    area        = width * height;
+        byte[] matrix      = new byte[area];
+        int    inputOffset = top * dataWidth + left;
 
         // If the width matches the full width of the underlying data, perform a single copy.
         if (width == dataWidth) {
@@ -112,11 +112,11 @@ public final class PlanarYUVLuminanceSource extends LuminanceSource {
     }
 
     public Bitmap renderCroppedGreyscaleBitmap() {
-        int width = getWidth();
-        int height = getHeight();
-        int[] pixels = new int[width * height];
-        byte[] yuv = yuvData;
-        int inputOffset = top * dataWidth + left;
+        int    width       = getWidth();
+        int    height      = getHeight();
+        int[]  pixels      = new int[width * height];
+        byte[] yuv         = yuvData;
+        int    inputOffset = top * dataWidth + left;
 
         for (int y = 0; y < height; y++) {
             int outputOffset = y * width;

@@ -46,7 +46,7 @@ public class CaptureActivity extends AppCompatActivity {
         @Override
         public void onAnalyzeSuccess(Bitmap mBitmap, String result) {
             Intent resultIntent = new Intent();
-            Bundle bundle = new Bundle();
+            Bundle bundle       = new Bundle();
             bundle.putInt(CodeUtils.RESULT_TYPE, CodeUtils.RESULT_SUCCESS);
             bundle.putString(CodeUtils.RESULT_STRING, result);
             resultIntent.putExtras(bundle);
@@ -57,7 +57,7 @@ public class CaptureActivity extends AppCompatActivity {
         @Override
         public void onAnalyzeFailed() {
             Intent resultIntent = new Intent();
-            Bundle bundle = new Bundle();
+            Bundle bundle       = new Bundle();
             bundle.putInt(CodeUtils.RESULT_TYPE, CodeUtils.RESULT_FAILED);
             bundle.putString(CodeUtils.RESULT_STRING, "");
             resultIntent.putExtras(bundle);

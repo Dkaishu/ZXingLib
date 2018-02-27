@@ -58,8 +58,8 @@ public class DecodeFormatManager {
     }
 
     static Vector<BarcodeFormat> parseDecodeFormats(Intent intent) {
-        List<String> scanFormats = null;
-        String scanFormatsString = intent.getStringExtra(Intents.Scan.SCAN_FORMATS);
+        List<String> scanFormats       = null;
+        String       scanFormatsString = intent.getStringExtra(Intents.Scan.SCAN_FORMATS);
         if (scanFormatsString != null) {
             scanFormats = Arrays.asList(COMMA_PATTERN.split(scanFormatsString));
         }

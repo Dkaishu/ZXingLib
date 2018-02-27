@@ -104,7 +104,7 @@ public class CodeUtils {
      * @param text
      * @param w
      * @param h
-     * @param logo
+     * @param logo 为null时，不带logo
      * @return
      */
     public static Bitmap createImage(String text, int w, int h, Bitmap logo) {
@@ -202,6 +202,7 @@ public class CodeUtils {
 
     /**
      * 打开或关闭闪光灯
+     *
      * @param on
      */
     public static void setLight(boolean on) {

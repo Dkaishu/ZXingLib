@@ -82,22 +82,23 @@ public class CaptureFragment extends Fragment implements SurfaceHolder.Callback 
         surfaceView = (SurfaceView) view.findViewById(R.id.preview_view);
         surfaceHolder = surfaceView.getHolder();
         flashlight = (ImageButton) view.findViewById(R.id.flash_light);
-        flashlight.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (isLightOn) {
-                    CodeUtils.setLight(false);
-                    isLightOn = false;
-                    flashlight.setImageDrawable(getResources().getDrawable(R.drawable.high_light_on));
-                } else {
-                    CodeUtils.setLight(true);
-                    isLightOn = true;
-                    flashlight.setImageDrawable(getResources().getDrawable(R.drawable.high_light_off));
+        if (null != flashlight) {
+            flashlight.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (isLightOn) {
+                        CodeUtils.setLight(false);
+                        isLightOn = false;
+                        flashlight.setImageDrawable(getResources().getDrawable(R.drawable.high_light_on));
+                    } else {
+                        CodeUtils.setLight(true);
+                        isLightOn = true;
+                        flashlight.setImageDrawable(getResources().getDrawable(R.drawable.high_light_off));
+                    }
                 }
-            }
-        });
-        flashlight.setVisibility(showFlashLight ? View.VISIBLE : View.GONE);
-
+            });
+            flashlight.setVisibility(showFlashLight ? View.VISIBLE : View.GONE);
+        }
         return view;
     }
 
