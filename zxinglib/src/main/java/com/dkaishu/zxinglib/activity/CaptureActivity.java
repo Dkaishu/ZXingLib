@@ -13,7 +13,7 @@ import com.dkaishu.zxinglib.CheckPermissionUtils;
 
 /**
  * Initial the camera
- * <p>
+ *
  * 默认的二维码扫描Activity
  */
 public class CaptureActivity extends AppCompatActivity {
@@ -22,7 +22,6 @@ public class CaptureActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.camera);
-        initPermission();
         CaptureFragment captureFragment = new CaptureFragment();
         captureFragment.setAnalyzeCallback(analyzeCallback);
         getSupportFragmentManager().beginTransaction().replace(R.id.fl_zxing_container, captureFragment).commit();
@@ -65,19 +64,4 @@ public class CaptureActivity extends AppCompatActivity {
             CaptureActivity.this.finish();
         }
     };
-
-    /**
-     * 初始化权限事件
-     */
-    private void initPermission() {
-        //检查权限
-        String[] permissions = CheckPermissionUtils.checkPermission(this);
-        if (permissions.length == 0) {
-            //权限都申请了
-            //是否登录
-        } else {
-            //申请权限
-            ActivityCompat.requestPermissions(this, permissions, 100);
-        }
-    }
 }

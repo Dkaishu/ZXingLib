@@ -41,6 +41,10 @@ public class CustomActivity extends AppCompatActivity {
             resultIntent.putExtras(bundle);
             CustomActivity.this.setResult(RESULT_OK, resultIntent);
             CustomActivity.this.finish();
+//            Intent intent = new Intent(CustomActivity.this, SecondActivity.class);
+//            intent.putExtra(CodeUtils.RESULT_STRING, result);
+//            startActivity(intent);
+//            finish();
         }
 
         @Override

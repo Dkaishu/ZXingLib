@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -19,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 
+import com.dkaishu.zxinglib.CheckPermissionUtils;
 import com.dkaishu.zxinglib.R;
 import com.dkaishu.zxinglib.camera.CameraManager;
 import com.dkaishu.zxinglib.decoding.CaptureActivityHandler;
@@ -59,6 +61,7 @@ public class CaptureFragment extends Fragment implements SurfaceHolder.Callback 
         CameraManager.init(getActivity().getApplication());
         hasSurface = false;
         inactivityTimer = new InactivityTimer(this.getActivity());
+        initPermission();
     }
 
     @Nullable
@@ -137,6 +140,11 @@ public class CaptureFragment extends Fragment implements SurfaceHolder.Callback 
     public void onDestroy() {
         super.onDestroy();
         inactivityTimer.shutdown();
+        if (mediaPlayer != null) {
+            mediaPlayer.stop();
+            mediaPlayer.release();
+            mediaPlayer = null;
+        }
     }
 
 
@@ -296,5 +304,19 @@ public class CaptureFragment extends Fragment implements SurfaceHolder.Callback 
         void callBack(Exception e);
     }
 
+
+    /**
+     * 初始化权限事件
+     */
+    private void initPermission() {
+        //检查权限
+        String[] permissions = CheckPermissionUtils.checkPermission(this.getActivity());
+        if (permissions.length == 0) {
+            //权限都申请了
+        } else {
+            //申请权限
+            ActivityCompat.requestPermissions(this.getActivity(), permissions, 100);
+        }
+    }
 
 }
