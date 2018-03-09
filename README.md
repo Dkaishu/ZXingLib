@@ -26,7 +26,7 @@ To get the project into your build:
 - Step 2. Add the dependency
 
         dependencies {
-                compile 'com.github.Dkaishu:ZXingLib:V1.0.5'
+                compile 'com.github.Dkaishu:ZXingLib:V1.0.6'
         }
 
 That's it! Add then:
