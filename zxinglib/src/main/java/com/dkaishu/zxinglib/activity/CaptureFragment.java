@@ -49,9 +49,6 @@ public class CaptureFragment extends Fragment implements SurfaceHolder.Callback 
     private        boolean                   vibrate;
     private        SurfaceView               surfaceView;
     private        SurfaceHolder             surfaceHolder;
-    private        ImageButton               flashlight;
-    private static boolean                   showFlashLight;
-    private        boolean                   isLightOn;
     private        CodeUtils.AnalyzeCallback analyzeCallback;
     private        Camera                    camera;
 
@@ -84,24 +81,6 @@ public class CaptureFragment extends Fragment implements SurfaceHolder.Callback 
         viewfinderView = (ViewfinderView) view.findViewById(R.id.viewfinder_view);
         surfaceView = (SurfaceView) view.findViewById(R.id.preview_view);
         surfaceHolder = surfaceView.getHolder();
-        flashlight = (ImageButton) view.findViewById(R.id.flash_light);
-        if (null != flashlight) {
-            flashlight.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (isLightOn) {
-                        CodeUtils.setLight(false);
-                        isLightOn = false;
-                        flashlight.setImageDrawable(getResources().getDrawable(R.drawable.high_light_on));
-                    } else {
-                        CodeUtils.setLight(true);
-                        isLightOn = true;
-                        flashlight.setImageDrawable(getResources().getDrawable(R.drawable.high_light_off));
-                    }
-                }
-            });
-            flashlight.setVisibility(showFlashLight ? View.VISIBLE : View.GONE);
-        }
         return view;
     }
 
@@ -262,10 +241,6 @@ public class CaptureFragment extends Fragment implements SurfaceHolder.Callback 
             Vibrator vibrator = (Vibrator) getActivity().getSystemService(getActivity().VIBRATOR_SERVICE);
             vibrator.vibrate(VIBRATE_DURATION);
         }
-    }
-
-    public static void showFlashLight(boolean show) {
-        showFlashLight = show;
     }
 
     /**

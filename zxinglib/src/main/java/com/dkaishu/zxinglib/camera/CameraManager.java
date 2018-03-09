@@ -297,6 +297,7 @@ public final class CameraManager {
         Rect   rect                = getFramingRectInPreview();
         int    previewFormat       = configManager.getPreviewFormat();
         String previewFormatString = configManager.getPreviewFormatString();
+
         switch (previewFormat) {
             // This is the standard Android format which all devices are REQUIRED to support.
             // In theory, it's the only one we should ever care about.

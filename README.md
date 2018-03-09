@@ -1,6 +1,7 @@
 # ZXingLib
 
 [![](https://jitpack.io/v/Dkaishu/ZXingLib.svg)](https://jitpack.io/#Dkaishu/ZXingLib)
+
 快速集成：二维码扫描及生成
 
 - 二维码扫描识别
@@ -25,7 +26,7 @@ To get the project into your build:
 - Step 2. Add the dependency
 
         dependencies {
-                compile 'com.github.Dkaishu:ZXingLib:V1.0.3'
+                compile 'com.github.Dkaishu:ZXingLib:V1.0.5'
         }
 
 That's it! Add then:
@@ -54,7 +55,11 @@ That's it! Add then:
        CaptureFragment.showFlashLight(true);  //是否显示闪光灯开关，默认不显示
        Intent intent = new Intent(MainActivity.this, CaptureActivity.class);
        startActivityForResult(intent, REQUEST_CODE);
-       
+
+ - 闪光灯控制
+
+         CodeUtils.setLight(true);
+
  - onActivityResult 方法中接收扫描结果
  
         if (requestCode == REQUEST_CODE) {
@@ -149,5 +154,3 @@ That's it! Add then:
     - 其他待补充
 
      - TODO
-
-            下版本将默认界面中闪光灯去掉，因为使用者自己去实现更加合理。

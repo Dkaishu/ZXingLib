@@ -84,7 +84,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void startCapture(View view) {
-        CaptureFragment.showFlashLight(true);
         Intent intent = new Intent(getApplication(), CaptureActivity.class);
         startActivityForResult(intent, REQUEST_CODE);
     }
