@@ -52,7 +52,6 @@ That's it! Add then:
  
  - 打开扫码界面
 
-       CaptureFragment.showFlashLight(true);  //是否显示闪光灯开关，默认不显示
        Intent intent = new Intent(MainActivity.this, CaptureActivity.class);
        startActivityForResult(intent, REQUEST_CODE);
 
@@ -136,7 +135,7 @@ That's it! Add then:
 
 
             //根据需求选择性自定义即可，其中 ：
-            // 一、调用CondeUtils.setFragmentArgs方法，改变参数进行调整，具体参数有：
+            // 一、调用CodeUtils.setFragmentArgs方法，改变参数进行调整，具体参数有：
             app:inner_width="200dp"
             app:inner_height="200dp"
             app:inner_margintop="150dp"
@@ -151,6 +150,11 @@ That's it! Add then:
 
             // 三、替换添加扫描控件
 
-    - 其他待补充
 
-     - TODO
+   - 其他
+
+     - 当扫描时间超过 5 * 60s 时，扫描会自动停止关闭
+
+    - TODO
+
+      - 欢迎issue
