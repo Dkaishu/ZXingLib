@@ -153,4 +153,4 @@ That's it! Add then:
 
 - TODO
 
-      - 欢迎issue
+      - 欢迎issue[issue](https://github.com/Dkaishu/ZXingLib/issues)
