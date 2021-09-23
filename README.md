@@ -42,7 +42,7 @@ That's it! Add then:
         <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
         <uses-permission android:name="android.permission.INTERNET" />
 
- - 在 Application 中初始化
+- 在 Application 中初始化
  
        @Override
         public void onCreate() {
@@ -50,16 +50,16 @@ That's it! Add then:
           ZXingLib.initDisplayOpinion(this);
          }
  
- - 打开扫码界面
+- 打开扫码界面
 
        Intent intent = new Intent(MainActivity.this, CaptureActivity.class);
        startActivityForResult(intent, REQUEST_CODE);
 
- - 闪光灯控制
+- 闪光灯控制
 
-   CodeUtils.setLight(true);
+        CodeUtils.setLight(true);
 
- - onActivityResult 方法中接收扫描结果
+- onActivityResult 方法中接收扫描结果
  
         if (requestCode == REQUEST_CODE) {
              //处理扫描结果（在界面上显示）
@@ -77,7 +77,7 @@ That's it! Add then:
              }
          }
          
- - 解析二维码图片
+- 解析二维码图片
 
         // 打开图库
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
@@ -108,12 +108,12 @@ That's it! Add then:
             e.printStackTrace();
         }
 
-  - 生成二维码
+- 生成二维码
 
         //最后一个参数为null时，则不带logo
         Bitmap Bitmap = CodeUtils.createImage(textContent, 400, 400, BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher));
 
-    - 自定义UI
+- 自定义UI
 
          //在activity中
          @Override
@@ -147,10 +147,10 @@ That's it! Add then:
          // 三、替换添加扫描控件
 
 
-   - 其他
+- 其他
 
-     - 当扫描时间超过 5 * 60s 时，扫描会自动停止关闭
+  - 当扫描时间超过 5 * 60s 时，扫描会自动停止关闭
 
-    - TODO
+- TODO
 
       - 欢迎issue
