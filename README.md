@@ -8,6 +8,7 @@
 - 二维码生成（支持是否带图标）
 - 可自定义扫描界面 UI
 - 支持本地二维码图片解析
+- 识别速度超快
 
 ### 使用
 How to
@@ -153,4 +154,4 @@ That's it! Add then:
 
 - TODO
 
-  - 欢迎issue[issue](https://github.com/Dkaishu/ZXingLib/issues)
+  - 欢迎[issue](https://github.com/Dkaishu/ZXingLib/issues)
