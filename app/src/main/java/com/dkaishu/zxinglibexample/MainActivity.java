@@ -5,21 +5,21 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.dkaishu.zxinglib.activity.CaptureActivity;
-import com.dkaishu.zxinglib.activity.CaptureFragment;
 import com.dkaishu.zxinglib.activity.CodeUtils;
 
 public class MainActivity extends AppCompatActivity {
     /**
      * 扫描跳转Activity RequestCode
      */
-    public static final  int    REQUEST_CODE  = 111;
-    public static final  int    REQUEST_IMAGE = 112;
+    public static final int REQUEST_CODE = 111;
+    public static final int REQUEST_IMAGE = 112;
 
     private ImageView imageView;
 
@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_CODE) {
             //处理扫描结果（在界面上显示）
             if (null != data) {
@@ -47,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }
-         /*选择系统图片并解析*/
+        /*选择系统图片并解析*/
         else if (requestCode == REQUEST_IMAGE) {
             if (data != null) {
                 Uri uri = data.getData();

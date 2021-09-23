@@ -9,16 +9,16 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
-import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
+
+import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.Fragment;
 
 import com.dkaishu.zxinglib.CheckPermissionUtils;
 import com.dkaishu.zxinglib.R;
@@ -38,19 +38,19 @@ import java.util.Vector;
 public class CaptureFragment extends Fragment implements SurfaceHolder.Callback {
 
     private CaptureActivityHandler handler;
-    private ViewfinderView         viewfinderView;
-    private boolean                hasSurface;
-    private Vector<BarcodeFormat>  decodeFormats;
-    private String                 characterSet;
-    private InactivityTimer        inactivityTimer;
-    private MediaPlayer            mediaPlayer;
-    private boolean                playBeep;
+    private ViewfinderView viewfinderView;
+    private boolean hasSurface;
+    private Vector<BarcodeFormat> decodeFormats;
+    private String characterSet;
+    private InactivityTimer inactivityTimer;
+    private MediaPlayer mediaPlayer;
+    private boolean playBeep;
     private static final float BEEP_VOLUME = 0.10f;
-    private        boolean                   vibrate;
-    private        SurfaceView               surfaceView;
-    private        SurfaceHolder             surfaceHolder;
-    private        CodeUtils.AnalyzeCallback analyzeCallback;
-    private        Camera                    camera;
+    private boolean vibrate;
+    private SurfaceView surfaceView;
+    private SurfaceHolder surfaceHolder;
+    private CodeUtils.AnalyzeCallback analyzeCallback;
+    private Camera camera;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -66,7 +66,7 @@ public class CaptureFragment extends Fragment implements SurfaceHolder.Callback 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         Bundle bundle = getArguments();
-        View   view   = null;
+        View view = null;
         if (bundle != null) {
             int layoutId = bundle.getInt(CodeUtils.LAYOUT_ID);
             if (layoutId != -1) {
@@ -290,7 +290,9 @@ public class CaptureFragment extends Fragment implements SurfaceHolder.Callback 
             //权限都申请了
         } else {
             //申请权限
-            ActivityCompat.requestPermissions(this.getActivity(), permissions, 100);
+            if (getActivity() != null) {
+                ActivityCompat.requestPermissions(getActivity(), permissions, 100);
+            }
         }
     }
 
